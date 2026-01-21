@@ -7,8 +7,8 @@ export const Route = createLazyFileRoute("/admin/dashboard")({
 
 function AdminDashboard() {
   useEffect(() => {
-    console.log("🟢 MOUNTED: Admin Dashboard");
-    return () => console.log("🔴 UNMOUNTED: Admin Dashboard");
+    // console.log("🟢 MOUNTED: Admin Dashboard");
+    // return () => console.log("🔴 UNMOUNTED: Admin Dashboard");
   }, []);
 
   return (

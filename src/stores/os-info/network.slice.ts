@@ -30,6 +30,6 @@ export const createNetworkSlice: StateCreator<OsInfoStore, [], [], NetworkAction
     },
 
     syncWithServer: async () => {
-        console.log("Syncing logic here...");
+        // console.log("Syncing logic here...");
     }
 });

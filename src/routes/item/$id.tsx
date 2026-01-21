@@ -10,8 +10,8 @@ function ItemDetail() {
   const { id } = Route.useParams();
 
   useEffect(() => {
-    console.log(`🟢 MOUNTED: Item ${id}`);
-    return () => console.log(`🔴 UNMOUNTED: Item ${id}`);
+    // console.log(`🟢 MOUNTED: Item ${id}`);
+    // return () => console.log(`🔴 UNMOUNTED: Item ${id}`);
   }, [id]);
 
   return (

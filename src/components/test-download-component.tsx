@@ -62,7 +62,7 @@ export default function TestDownloadComponent() {
       const db = await Database.load("sqlite:mydatabase.db");
       await db.execute("DELETE FROM DownloadList");
 
-      console.log("Download history cleared");
+      // console.log("Download history cleared");
     } catch (error) {
       console.error("Failed to clear history:", error);
     }

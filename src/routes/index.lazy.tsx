@@ -8,8 +8,8 @@ export const Route = createLazyFileRoute("/")({
 
 function Index() {
   useEffect(() => {
-    console.log("🟢 MOUNTED: Home Page");
-    return () => console.log("🔴 UNMOUNTED: Home Page");
+    // console.log("🟢 MOUNTED: Home Page");
+    // return () => console.log("🔴 UNMOUNTED: Home Page");
   }, []);
 
   return (

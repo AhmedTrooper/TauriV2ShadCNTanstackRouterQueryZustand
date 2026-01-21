@@ -5,6 +5,11 @@
   "windows": ["main"],
   "permissions": [
     "core:default",
+    "core:window:allow-minimize",
+    "core:window:allow-maximize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-close",
+    "core:window:allow-start-dragging",
     "shell:default",
     {
       "identifier": "shell:allow-execute",
@@ -30,6 +35,7 @@
     "sql:allow-execute",
     "sql:allow-load",
     "http:default",
+
     {
       "identifier": "http:default",
       "allow": [{ "url": "https://jsonplaceholder.typicode.com/*" }],

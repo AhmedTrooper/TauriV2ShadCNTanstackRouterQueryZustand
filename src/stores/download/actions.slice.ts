@@ -43,7 +43,7 @@ export const createDownloadActionsSlice: StateCreator<
             });
 
             command.stderr.on("data", (line) => {
-                console.log(`[${uniqueId}] stderr:`, line);
+                // console.log(`[${uniqueId}] stderr:`, line);
             });
 
             const child = await command.spawn();
