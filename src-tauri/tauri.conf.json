@@ -27,7 +27,6 @@
   },
   "plugins": {
     "updater": {
-      "active": true,
       "endpoints": [
         "https://github.com/AhmedTrooper/TauriV2ShadCNTanstackRouterQueryZustand/releases/latest/download/latest.json"
       ],
