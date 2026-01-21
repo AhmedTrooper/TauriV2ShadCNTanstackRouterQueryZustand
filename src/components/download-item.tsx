@@ -2,7 +2,7 @@ import { useDownloadStore } from "@/stores/download";
 import { memo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { Button } from "./ui/button";
-import { Pause, Play, RefreshCw, XCircle } from "lucide-react";
+import { Pause, Play, RefreshCw } from "lucide-react";
 
 interface Props {
   uniqueId: string;

@@ -175,3 +175,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# src-tauri/.gitignore
+main.key

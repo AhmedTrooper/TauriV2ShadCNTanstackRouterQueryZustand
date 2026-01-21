@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { getName } from "@tauri-apps/api/app";
+import { relaunch } from "@tauri-apps/plugin-process";
 import {
   Minus,
   Square,
@@ -19,10 +20,11 @@ import { useUpdateStore } from "@/stores/update";
 export function TitleBar() {
   const [isMaximized, setIsMaximized] = useState(false);
   const [appName, setAppName] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const appWindow = getCurrentWindow();
   const { theme, setTheme } = useTheme();
   const router = useRouter();
-
   const { isUpdateAvailable, checkUpdate } = useUpdateStore();
 
   useEffect(() => {
@@ -36,6 +38,24 @@ export function TitleBar() {
       unlisten.then((f) => f());
     };
   }, []);
+
+  const handleUpdateProcess = async () => {
+    if (!isUpdateAvailable || isUpdating) return;
+
+    try {
+      const { check } = await import("@tauri-apps/plugin-updater");
+      const update = await check();
+
+      if (update) {
+        setIsUpdating(true);
+        await update.downloadAndInstall();
+        await relaunch();
+      }
+    } catch (err) {
+      console.error("Update failed:", err);
+      setIsUpdating(false);
+    }
+  };
 
   return (
     <div
@@ -60,11 +80,20 @@ export function TitleBar() {
           </button>
         </div>
 
-        <div className="pl-3 flex items-center gap-2 pointer-events-none">
+        <div className="pl-3 flex items-center gap-2">
           <Circle
-            className={`w-2 h-2 fill-current ${isUpdateAvailable ? "text-red-500 animate-pulse" : "text-green-500"}`}
+            onClick={handleUpdateProcess}
+            className={`w-2 h-2 fill-current transition-all 
+              ${
+                isUpdating
+                  ? "text-yellow-500 animate-spin"
+                  : isUpdateAvailable
+                    ? "text-red-500 animate-pulse cursor-pointer hover:scale-125"
+                    : "text-green-500"
+              }
+            `}
           />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70">
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70 pointer-events-none">
             {appName}
           </span>
         </div>

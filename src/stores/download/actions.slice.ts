@@ -12,7 +12,7 @@ const activeDownloads = new Map<string, Child>();
 export const createDownloadActionsSlice: StateCreator<
     DownloadStore, [], [],
     Pick<DownloadStore, "fetchDownloads" | "startDownload" | "pauseDownload" | "resumeDownload" | "clearAllHistory">
-> = (set, get) => {
+> = (_set, get) => {
 
     // Helper to spawn the process (used by Start and Resume)
     const spawnYtDlp = async (uniqueId: string, url: string) => {
@@ -42,7 +42,7 @@ export const createDownloadActionsSlice: StateCreator<
                 get().updateDownloadState(uniqueId, { tracking_message: msg });
             });
 
-            command.stderr.on("data", (line) => {
+            command.stderr.on("data", (_line) => {
                 // console.log(`[${uniqueId}] stderr:`, line);
             });
 
