@@ -28,6 +28,12 @@
     },
     "sql:default",
     "sql:allow-execute",
-    "sql:allow-load"
+    "sql:allow-load",
+    "http:default",
+    {
+      "identifier": "http:default",
+      "allow": [{ "url": "https://jsonplaceholder.typicode.com/*" }],
+      "scope": ["https://jsonplaceholder.typicode.com/*"]
+    }
   ]
 }
