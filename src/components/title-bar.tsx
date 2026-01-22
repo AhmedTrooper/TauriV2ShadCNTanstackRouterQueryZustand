@@ -21,6 +21,7 @@ export function TitleBar() {
   const [isMaximized, setIsMaximized] = useState(false);
   const [appName, setAppName] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const appWindow = getCurrentWindow();
   const { theme, setTheme } = useTheme();
@@ -48,7 +49,35 @@ export function TitleBar() {
 
       if (update) {
         setIsUpdating(true);
-        await update.downloadAndInstall();
+        console.log(
+          `found update ${update.version} from ${update.date} with notes ${update.body}`,
+        );
+        let downloaded = 0;
+        let contentLength = 0;
+
+        await update.downloadAndInstall((event) => {
+          switch (event.event) {
+            case "Started":
+              contentLength = event.data.contentLength || 0;
+              setProgress(0);
+              console.log(
+                `started downloading ${event.data.contentLength} bytes`,
+              );
+              break;
+            case "Progress":
+              downloaded += event.data.chunkLength;
+              if (contentLength > 0) {
+                setProgress((downloaded / contentLength) * 100);
+              }
+              console.log(`downloaded ${downloaded} from ${contentLength}`);
+              break;
+            case "Finished":
+              setProgress(100);
+              console.log("download finished");
+              break;
+          }
+        });
+
         await relaunch();
       }
     } catch (err) {
@@ -93,6 +122,11 @@ export function TitleBar() {
               }
             `}
           />
+          {isUpdating && (
+            <span className="text-[10px] font-bold text-muted-foreground tabular-nums">
+              {Math.round(progress)}%
+            </span>
+          )}
           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70 pointer-events-none">
             {appName}
           </span>
