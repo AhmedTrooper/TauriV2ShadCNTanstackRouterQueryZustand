@@ -21,37 +21,40 @@ const DownloadItem = ({ uniqueId }: Props) => {
   const getStatusConfig = () => {
     if (item.active)
       return {
-        color: "bg-blue-100 text-blue-700 border-blue-200",
+        color: "bg-blue-500/15 text-blue-600 dark:text-blue-300 border-blue-500/35",
         label: "Downloading",
       };
     if (item.isPaused)
       return {
-        color: "bg-amber-100 text-amber-700 border-amber-200",
+        color: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/35",
         label: "Paused",
       };
     if (item.completed)
       return {
-        color: "bg-green-100 text-green-700 border-green-200",
+        color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/35",
         label: "Success",
       };
     if (item.failed)
       return {
-        color: "bg-red-100 text-red-700 border-red-200",
+        color: "bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/35",
         label: "Failed",
       };
-    return { color: "bg-gray-100 text-gray-700", label: "Unknown" };
+    return {
+      color: "bg-muted text-muted-foreground border-border",
+      label: "Unknown",
+    };
   };
 
   const status = getStatusConfig();
 
   return (
     <div
-      className={`p-4 border rounded-lg shadow-sm mb-3 transition-all bg-white ${item.active ? "border-blue-400 shadow-md" : "border-neutral-200"}`}
+      className={`p-4 border rounded-lg shadow-xs mb-3 transition-colors bg-card ${item.active ? "border-primary/60" : "border-border"}`}
     >
       <div className="flex justify-between items-start mb-3 gap-4">
         <div className="flex-1 min-w-0">
           <h3
-            className="font-medium text-neutral-900 truncate"
+            className="font-medium text-foreground truncate"
             title={item.web_url}
           >
             {item.title || item.web_url}
@@ -62,7 +65,7 @@ const DownloadItem = ({ uniqueId }: Props) => {
             >
               {status.label}
             </span>
-            <span className="text-xs text-neutral-400 font-mono">
+            <span className="text-xs text-muted-foreground font-mono">
               ID: {item.unique_id.slice(0, 8)}
             </span>
           </div>
@@ -74,7 +77,7 @@ const DownloadItem = ({ uniqueId }: Props) => {
             <Button
               size="icon"
               variant="outline"
-              className="h-8 w-8 text-amber-600 hover:text-amber-700 hover:bg-amber-50 border-amber-200"
+              className="h-8 w-8 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10 border-amber-500/30"
               onClick={() => pauseDownload(uniqueId)}
               title="Pause Download"
             >
@@ -86,7 +89,7 @@ const DownloadItem = ({ uniqueId }: Props) => {
             <Button
               size="icon"
               variant="outline"
-              className="h-8 w-8 text-green-600 hover:text-green-700 hover:bg-green-50 border-green-200"
+              className="h-8 w-8 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 border-emerald-500/30"
               onClick={() => resumeDownload(uniqueId)}
               title="Resume Download"
             >
@@ -98,7 +101,7 @@ const DownloadItem = ({ uniqueId }: Props) => {
             <Button
               size="icon"
               variant="outline"
-              className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
+              className="h-8 w-8 text-red-700 dark:text-red-300 hover:bg-red-500/10 border-red-500/30"
               onClick={() => resumeDownload(uniqueId)} // Retry logic is same as resume
               title="Retry Download"
             >
@@ -109,8 +112,8 @@ const DownloadItem = ({ uniqueId }: Props) => {
       </div>
 
       {/* TERMINAL OUTPUT */}
-      <div className="bg-neutral-950 text-neutral-300 p-2.5 rounded-md text-xs font-mono overflow-x-auto whitespace-pre-wrap border border-neutral-800 shadow-inner">
-        <span className="text-green-500 mr-2">$</span>
+      <div className="bg-muted/55 text-foreground/90 p-2.5 rounded-md text-xs font-mono overflow-x-auto whitespace-pre-wrap border border-border shadow-inner">
+        <span className="text-primary mr-2">$</span>
         {item.tracking_message || "Waiting to start..."}
       </div>
     </div>

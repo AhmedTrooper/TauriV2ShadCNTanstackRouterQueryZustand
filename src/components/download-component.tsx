@@ -27,9 +27,9 @@ export default function DownloadComponent() {
 
   return (
     <div className="p-4 max-w-3xl mx-auto font-sans">
-      <div className="bg-white p-6 rounded-lg shadow-sm mb-6 border border-neutral-200">
+      <div className="bg-card p-6 rounded-lg shadow-xs mb-6 border border-border text-card-foreground">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">
+          <h1 className="text-2xl font-bold text-foreground tracking-tight">
             Media Downloader
           </h1>
 
@@ -37,7 +37,7 @@ export default function DownloadComponent() {
             <Button
               variant="ghost"
               onClick={clearAllHistory}
-              className="text-red-600 hover:text-red-700 hover:bg-red-50 text-xs h-8"
+              className="text-destructive hover:text-destructive hover:bg-destructive/10 text-xs h-8"
             >
               Clear History
             </Button>
@@ -56,7 +56,7 @@ export default function DownloadComponent() {
           <Button
             onClick={handleStart}
             disabled={!fileUrl}
-            className="bg-neutral-900 text-white hover:bg-neutral-800"
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
             Download
           </Button>
@@ -64,12 +64,12 @@ export default function DownloadComponent() {
       </div>
 
       <div className="space-y-1">
-        <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3 px-1">
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-1">
           Queue ({ids.length})
         </h2>
 
         {ids.length === 0 ? (
-          <div className="text-center py-12 text-neutral-400 border-2 border-dashed border-neutral-200 rounded-lg bg-neutral-50/50">
+          <div className="text-center py-12 text-muted-foreground border-2 border-dashed border-border rounded-lg bg-muted/30">
             <p>No downloads yet.</p>
           </div>
         ) : (

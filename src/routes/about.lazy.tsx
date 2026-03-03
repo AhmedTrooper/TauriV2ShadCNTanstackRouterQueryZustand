@@ -49,10 +49,10 @@ function About() {
   return (
     <div className="p-6 max-w-2xl mx-auto font-sans space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold tracking-tight text-neutral-900">
+        <h2 className="text-3xl font-bold tracking-tight text-foreground">
           Tauri HTTP + Query
         </h2>
-        <Link to="/" className="text-sm text-neutral-500 hover:text-neutral-900 underline">
+        <Link to="/" className="text-sm text-muted-foreground hover:text-foreground underline">
           &larr; Back Home
         </Link>
       </div>
@@ -61,20 +61,20 @@ function About() {
         <CardHeader className="pb-3">
           <CardTitle className="text-lg font-medium flex items-center gap-2">
             GET Request Demo
-            {isLoading && <Loader2 className="h-4 w-4 animate-spin text-neutral-400" />}
+            {isLoading && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />}
           </CardTitle>
         </CardHeader>
         <CardContent>
           {isError ? (
-            <div className="bg-red-50 text-red-600 p-4 rounded-md flex items-center gap-2">
+            <div className="bg-destructive/10 text-destructive p-4 rounded-md flex items-center gap-2">
               <AlertCircle className="h-5 w-5" />
               <span>Error: {error.message}</span>
             </div>
           ) : isLoading ? (
-            <div className="h-20 bg-neutral-100 animate-pulse rounded-md" />
+            <div className="h-20 bg-muted animate-pulse rounded-md" />
           ) : (
-            <div className="bg-neutral-50 p-4 rounded-md border border-neutral-200">
-              <pre className="text-sm font-mono text-neutral-700">
+            <div className="bg-muted/40 p-4 rounded-md border border-border">
+              <pre className="text-sm font-mono text-foreground/85">
                 {JSON.stringify(data, null, 2)}
               </pre>
             </div>
@@ -96,14 +96,14 @@ function About() {
           <CardTitle className="text-lg font-medium">POST Request Demo</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm text-muted-foreground">
             Clicking below will send a POST request to jsonplaceholder.
           </p>
           
           <Button
             onClick={() => mutation.mutate("My New Tauri Post")}
             disabled={mutation.isPending}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            className="w-full"
           >
             {mutation.isPending ? (
               <>
@@ -116,7 +116,7 @@ function About() {
           </Button>
 
           {mutation.isSuccess && (
-            <div className="bg-green-50 text-green-700 p-3 rounded-md flex items-start gap-2 text-sm">
+            <div className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 p-3 rounded-md flex items-start gap-2 text-sm border border-emerald-500/25">
               <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
               <div>
                 <p className="font-bold">Success!</p>

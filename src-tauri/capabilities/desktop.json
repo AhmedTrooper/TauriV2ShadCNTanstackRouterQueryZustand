@@ -4,7 +4,6 @@
   "windows": ["main"],
   "permissions": [
     "updater:default",
-    "updater:default",
     "updater:allow-install",
     "updater:allow-check",
     "updater:allow-download"
